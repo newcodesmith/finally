@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(codex exec:*)",
+      "WebFetch(domain:massive.io)",
+      "WebFetch(domain:polygon.io)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  }
+}
