@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from datetime import datetime, timezone
 
 from massive import RESTClient
 from massive.rest.models import SnapshotMarketType
@@ -99,8 +100,9 @@ class MassiveDataSource(MarketDataSource):
             for snap in snapshots:
                 try:
                     price = snap.last_trade.price
-                    # Massive timestamps are Unix milliseconds → convert to seconds
-                    timestamp = snap.last_trade.timestamp / 1000.0
+                    # Massive timestamps are Unix milliseconds → convert to ISO string
+                    ts_seconds = snap.last_trade.timestamp / 1000.0
+                    timestamp = datetime.fromtimestamp(ts_seconds, tz=timezone.utc).isoformat()
                     self._cache.update(
                         ticker=snap.ticker,
                         price=price,

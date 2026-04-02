@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
-import time
+from datetime import datetime, timezone
 from threading import Lock
 
 from .models import PriceUpdate
+
+
+def _iso_now() -> str:
+    return datetime.now(tz=timezone.utc).isoformat()
 
 
 class PriceCache:
@@ -17,24 +21,40 @@ class PriceCache:
 
     def __init__(self) -> None:
         self._prices: dict[str, PriceUpdate] = {}
+        self._session_opens: dict[str, float] = {}
         self._lock = Lock()
         self._version: int = 0  # Monotonically increasing; bumped on every update
 
-    def update(self, ticker: str, price: float, timestamp: float | None = None) -> PriceUpdate:
+    def update(
+        self,
+        ticker: str,
+        price: float,
+        timestamp: str | None = None,
+        session_open_price: float | None = None,
+    ) -> PriceUpdate:
         """Record a new price for a ticker. Returns the created PriceUpdate.
 
         Automatically computes direction and change from the previous price.
-        If this is the first update for the ticker, previous_price == price (direction='flat').
+        If this is the first update for the ticker, previous_price == price (direction='unchanged').
+
+        session_open_price: if provided on the first update, stored as the session open.
+        Once set, the session open is never overwritten.
         """
         with self._lock:
-            ts = timestamp or time.time()
+            ts = timestamp or _iso_now()
             prev = self._prices.get(ticker)
             previous_price = prev.price if prev else price
+
+            # Set session open price on first update; never overwrite it
+            if ticker not in self._session_opens:
+                self._session_opens[ticker] = session_open_price if session_open_price is not None else price
+            session_open = self._session_opens[ticker]
 
             update = PriceUpdate(
                 ticker=ticker,
                 price=round(price, 2),
                 previous_price=round(previous_price, 2),
+                session_open_price=round(session_open, 2),
                 timestamp=ts,
             )
             self._prices[ticker] = update
@@ -60,6 +80,7 @@ class PriceCache:
         """Remove a ticker from the cache (e.g., when removed from watchlist)."""
         with self._lock:
             self._prices.pop(ticker, None)
+            self._session_opens.pop(ticker, None)
 
     @property
     def version(self) -> int:

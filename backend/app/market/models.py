@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
-import time
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+
+
+def _iso_now() -> str:
+    return datetime.now(tz=timezone.utc).isoformat()
 
 
 @dataclass(frozen=True, slots=True)
@@ -13,7 +17,8 @@ class PriceUpdate:
     ticker: str
     price: float
     previous_price: float
-    timestamp: float = field(default_factory=time.time)  # Unix seconds
+    session_open_price: float
+    timestamp: str = field(default_factory=_iso_now)  # ISO 8601 string
 
     @property
     def change(self) -> float:
@@ -29,12 +34,12 @@ class PriceUpdate:
 
     @property
     def direction(self) -> str:
-        """'up', 'down', or 'flat'."""
+        """'up', 'down', or 'unchanged'."""
         if self.price > self.previous_price:
             return "up"
         elif self.price < self.previous_price:
             return "down"
-        return "flat"
+        return "unchanged"
 
     def to_dict(self) -> dict:
         """Serialize for JSON / SSE transmission."""
@@ -42,8 +47,9 @@ class PriceUpdate:
             "ticker": self.ticker,
             "price": self.price,
             "previous_price": self.previous_price,
+            "session_open_price": self.session_open_price,
             "timestamp": self.timestamp,
             "change": self.change,
             "change_percent": self.change_percent,
-            "direction": self.direction,
+            "change_direction": self.direction,
         }

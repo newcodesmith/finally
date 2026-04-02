@@ -84,7 +84,7 @@ class TestMassiveDataSource:
         assert cache.get_price("AAPL") is None  # No update happened
 
     async def test_timestamp_conversion(self):
-        """Test that timestamps are converted from milliseconds to seconds."""
+        """Test that timestamps are converted from milliseconds to ISO 8601 strings."""
         cache = PriceCache()
         source = MassiveDataSource(
             api_key="test-key",
@@ -101,7 +101,11 @@ class TestMassiveDataSource:
 
         update = cache.get("AAPL")
         assert update is not None
-        assert update.timestamp == 1707580800.0  # Converted to seconds
+        # Timestamp should be an ISO 8601 string
+        assert isinstance(update.timestamp, str)
+        assert "T" in update.timestamp
+        # The date portion should correspond to 2024-02-10 (1707580800 seconds)
+        assert update.timestamp.startswith("2024-02-10")
 
     async def test_add_ticker(self):
         """Test adding a ticker."""
