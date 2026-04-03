@@ -1,5 +1,6 @@
 """Tests for MassiveDataSource (mocked)."""
 
+import asyncio
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -202,4 +203,86 @@ class TestMassiveDataSource:
         # Cache should have data immediately from the first poll
         assert cache.get_price("AAPL") == 190.50
 
+        await source.stop()
+
+    async def test_start_with_initial_tickers(self):
+        """Test that start() initialises the internal ticker list from its argument."""
+        cache = PriceCache()
+        source = MassiveDataSource(api_key="test-key", price_cache=cache, poll_interval=60.0)
+
+        with patch("app.market.massive_client.RESTClient"):
+            with patch.object(source, "_fetch_snapshots", return_value=[]):
+                await source.start(["AAPL", "GOOGL", "MSFT"])
+
+        assert set(source.get_tickers()) == {"AAPL", "GOOGL", "MSFT"}
+        await source.stop()
+
+    async def test_session_open_price_set_on_first_poll(self):
+        """First poll price becomes the session open; subsequent polls leave it unchanged."""
+        cache = PriceCache()
+        source = MassiveDataSource(api_key="test-key", price_cache=cache, poll_interval=60.0)
+        source._tickers = ["AAPL"]
+        source._client = MagicMock()
+
+        first_snap = [_make_snapshot("AAPL", 190.00, 1707580800000)]
+        second_snap = [_make_snapshot("AAPL", 195.00, 1707580900000)]
+
+        with patch.object(source, "_fetch_snapshots", return_value=first_snap):
+            await source._poll_once()
+
+        with patch.object(source, "_fetch_snapshots", return_value=second_snap):
+            await source._poll_once()
+
+        update = cache.get("AAPL")
+        assert update is not None
+        assert update.price == 195.00
+        assert update.session_open_price == 190.00  # Locked in on first poll
+
+    async def test_snapshot_callback_invoked_in_poll_loop(self):
+        """snapshot_callback is called after each poll cycle in _poll_loop."""
+        cache = PriceCache()
+        call_count = 0
+
+        async def on_snapshot() -> None:
+            nonlocal call_count
+            call_count += 1
+
+        source = MassiveDataSource(
+            api_key="test-key",
+            price_cache=cache,
+            poll_interval=0.05,  # Fast interval for testing
+            snapshot_callback=on_snapshot,
+        )
+        source._tickers = ["AAPL"]
+
+        with patch("app.market.massive_client.RESTClient"):
+            with patch.object(source, "_fetch_snapshots", return_value=[]):
+                await source.start(["AAPL"])
+
+        await asyncio.sleep(0.2)  # Allow a few poll cycles
+        await source.stop()
+
+        assert call_count >= 1
+
+    async def test_snapshot_callback_exception_does_not_stop_poller(self):
+        """An exception in the snapshot callback is swallowed; the poller keeps running."""
+        cache = PriceCache()
+
+        async def failing_callback() -> None:
+            raise RuntimeError("snapshot error")
+
+        source = MassiveDataSource(
+            api_key="test-key",
+            price_cache=cache,
+            poll_interval=0.05,
+            snapshot_callback=failing_callback,
+        )
+
+        with patch("app.market.massive_client.RESTClient"):
+            with patch.object(source, "_fetch_snapshots", return_value=[]):
+                await source.start(["AAPL"])
+
+        await asyncio.sleep(0.2)
+        assert source._task is not None
+        assert not source._task.done()
         await source.stop()

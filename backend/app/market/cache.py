@@ -2,14 +2,9 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from threading import Lock
 
-from .models import PriceUpdate
-
-
-def _iso_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
+from .models import PriceUpdate, _iso_now
 
 
 class PriceCache:
@@ -85,7 +80,8 @@ class PriceCache:
     @property
     def version(self) -> int:
         """Current version counter. Useful for SSE change detection."""
-        return self._version
+        with self._lock:
+            return self._version
 
     def __len__(self) -> int:
         with self._lock:
