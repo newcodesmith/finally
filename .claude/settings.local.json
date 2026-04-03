@@ -29,7 +29,9 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'added={d}'\\)\")",
       "Bash(curl -s -X DELETE http://localhost:8002/api/watchlist/AMD)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'removed={d}'\\)\" echo \"\" echo \"=== Chat mock mode ===\" LLM_MOCK=true DB_PATH=../db/finally_test2.db uv run python -c \" import asyncio, os os.environ['LLM_MOCK'] = 'true' os.environ['DB_PATH'] = '../db/finally_test2.db' \" curl -s http://localhost:8002/api/portfolio/history)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'history snapshots: {len\\(d\\)}'\\)\" kill %1 rm -f ../db/finally_test2.db)"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'history snapshots: {len\\(d\\)}'\\)\" kill %1 rm -f ../db/finally_test2.db)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
     ]
   },
   "sandbox": {
