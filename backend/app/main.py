@@ -31,7 +31,7 @@ price_cache = PriceCache()
 
 
 async def _snapshot_callback() -> None:
-    """Called by SimulatorDataSource every ~30 seconds to record a portfolio snapshot."""
+    """Periodic portfolio snapshot — called by the market data source every ~30s."""
     from .db import get_cash_balance, get_positions
 
     try:
@@ -46,17 +46,7 @@ async def _snapshot_callback() -> None:
         logger.exception("Periodic portfolio snapshot failed")
 
 
-def _make_market_source():
-    """Create market source; inject snapshot callback into simulator if applicable."""
-    from .market.simulator import SimulatorDataSource
-
-    source = create_market_data_source(price_cache)
-    if isinstance(source, SimulatorDataSource):
-        source._snapshot_callback = _snapshot_callback
-    return source
-
-
-market_source = _make_market_source()
+market_source = create_market_data_source(price_cache, snapshot_callback=_snapshot_callback)
 
 
 @asynccontextmanager
