@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 1: Foundation & Market Data Engine** - Database, market simulator, price cache, and SSE streaming
 - [ ] **Phase 2: Watchlist & Portfolio APIs** - CRUD endpoints for watchlist and full trade execution pipeline
 - [ ] **Phase 3: AI Chat Backend** - LLM integration with structured output, auto-execution, and mock mode
-- [ ] **Phase 4: Frontend Shell & Live Data** - Layout, theme, watchlist panel with streaming prices, charts
+- [x] **Phase 4: Frontend Shell & Live Data** - Layout, theme, watchlist panel with streaming prices, charts (completed 2026-04-09)
 - [ ] **Phase 5: Frontend Portfolio & Trading** - Portfolio views, trade bar, and AI chat panel
 - [ ] **Phase 6: Infrastructure & Testing** - Docker containerization, scripts, and all test suites
 
@@ -78,12 +78,12 @@ Plans:
   2. The watchlist panel displays all tickers with current price, session change %, and sparkline mini-charts that fill in progressively from SSE data
   3. Prices flash green on uptick and red on downtick with a ~500ms CSS fade animation
   4. Clicking a ticker in the watchlist displays a larger detailed price chart in the main chart area
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 04-01-PLAN.md — Scaffold Next.js, Tailwind dark theme, layout shell with header and connection dot
 - [x] 04-02-PLAN.md — Zustand price store, SSE hook, watchlist panel with flash animations and sparklines
-- [ ] 04-03-PLAN.md — Main chart area with Lightweight Charts, visual verification checkpoint
+- [x] 04-03-PLAN.md — Main chart area with Lightweight Charts, visual verification checkpoint
 
 ### Phase 5: Frontend Portfolio & Trading
 **Goal**: Users can trade, view portfolio visualizations, and interact with the AI assistant through the UI
@@ -130,6 +130,6 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 | 1. Foundation & Market Data Engine | 2/2 | Complete | - |
 | 2. Watchlist & Portfolio APIs | 2/2 | Complete | - |
 | 3. AI Chat Backend | 1/2 | In Progress|  |
-| 4. Frontend Shell & Live Data | 2/3 | In Progress|  |
+| 4. Frontend Shell & Live Data | 3/3 | Complete   | 2026-04-09 |
 | 5. Frontend Portfolio & Trading | 0/3 | Not started | - |
 | 6. Infrastructure & Testing | 0/3 | Not started | - |

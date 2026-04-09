@@ -54,7 +54,7 @@
 
 ### Frontend - Charts & Portfolio
 
-- [ ] **UI-CHART-01**: Main chart area shows larger price chart for selected ticker
+- [x] **UI-CHART-01**: Main chart area shows larger price chart for selected ticker
 - [ ] **UI-HEAT-01**: Portfolio heatmap (treemap) with positions sized by weight, colored by P&L
 - [ ] **UI-HEAT-02**: Empty state shows placeholder message when no positions
 - [ ] **UI-PNL-01**: P&L line chart shows portfolio value over time from snapshots
@@ -157,7 +157,7 @@
 | UI-WATCH-02 | Phase 4 | Complete |
 | UI-WATCH-03 | Phase 4 | Complete |
 | UI-WATCH-04 | Phase 4 | Complete |
-| UI-CHART-01 | Phase 4 | Pending |
+| UI-CHART-01 | Phase 4 | Complete |
 | UI-HEAT-01 | Phase 5 | Pending |
 | UI-HEAT-02 | Phase 5 | Pending |
 | UI-PNL-01 | Phase 5 | Pending |
