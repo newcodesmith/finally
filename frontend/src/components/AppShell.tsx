@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import Header from './Header';
 import WatchlistPanel from './WatchlistPanel';
+import MainChart from './MainChart';
 import type { ConnectionStatus } from '@/types/market';
 
 interface AppShellProps {
@@ -36,9 +37,7 @@ export default function AppShell({
 
         {/* Main content area */}
         <main className="flex-1 overflow-hidden">
-          {children ?? (
-            <div className="p-4 text-text-secondary text-sm">Chart</div>
-          )}
+          {children ?? <MainChart />}
         </main>
       </div>
     </div>
