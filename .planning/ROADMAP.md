@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Restore environment, verify tests, create .env.example, upgrade health endpoint
+- [x] 01-01-PLAN.md — Restore environment, verify tests, create .env.example, upgrade health endpoint
 - [ ] 01-02-PLAN.md — Integration verification: server startup, DB init, SSE streaming end-to-end
 
 ### Phase 2: Watchlist & Portfolio APIs
