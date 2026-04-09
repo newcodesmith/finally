@@ -125,72 +125,72 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| MKT-01 | Pending | Pending |
-| MKT-02 | Pending | Pending |
-| MKT-03 | Pending | Pending |
-| MKT-04 | Pending | Pending |
-| MKT-05 | Pending | Pending |
-| MKT-06 | Pending | Pending |
-| MKT-07 | Pending | Pending |
-| WATCH-01 | Pending | Pending |
-| WATCH-02 | Pending | Pending |
-| WATCH-03 | Pending | Pending |
-| WATCH-04 | Pending | Pending |
-| PORT-01 | Pending | Pending |
-| PORT-02 | Pending | Pending |
-| PORT-03 | Pending | Pending |
-| PORT-04 | Pending | Pending |
-| PORT-05 | Pending | Pending |
-| PORT-06 | Pending | Pending |
-| PORT-07 | Pending | Pending |
-| PORT-08 | Pending | Pending |
-| CHAT-01 | Pending | Pending |
-| CHAT-02 | Pending | Pending |
-| CHAT-03 | Pending | Pending |
-| CHAT-04 | Pending | Pending |
-| CHAT-05 | Pending | Pending |
-| CHAT-06 | Pending | Pending |
-| CHAT-07 | Pending | Pending |
-| CHAT-08 | Pending | Pending |
-| CHAT-09 | Pending | Pending |
-| UI-WATCH-01 | Pending | Pending |
-| UI-WATCH-02 | Pending | Pending |
-| UI-WATCH-03 | Pending | Pending |
-| UI-WATCH-04 | Pending | Pending |
-| UI-CHART-01 | Pending | Pending |
-| UI-HEAT-01 | Pending | Pending |
-| UI-HEAT-02 | Pending | Pending |
-| UI-PNL-01 | Pending | Pending |
-| UI-POS-01 | Pending | Pending |
-| UI-TRADE-01 | Pending | Pending |
-| UI-CHAT-01 | Pending | Pending |
-| UI-CHAT-02 | Pending | Pending |
-| UI-CHAT-03 | Pending | Pending |
-| UI-LAYOUT-01 | Pending | Pending |
-| UI-LAYOUT-02 | Pending | Pending |
-| UI-LAYOUT-03 | Pending | Pending |
-| UI-LAYOUT-04 | Pending | Pending |
-| DB-01 | Pending | Pending |
-| DB-02 | Pending | Pending |
-| DB-03 | Pending | Pending |
-| INFRA-01 | Pending | Pending |
-| INFRA-02 | Pending | Pending |
-| INFRA-03 | Pending | Pending |
-| INFRA-04 | Pending | Pending |
-| INFRA-05 | Pending | Pending |
-| INFRA-06 | Pending | Pending |
-| TEST-01 | Pending | Pending |
-| TEST-02 | Pending | Pending |
-| TEST-03 | Pending | Pending |
-| TEST-04 | Pending | Pending |
-| TEST-05 | Pending | Pending |
-| TEST-06 | Pending | Pending |
+| MKT-01 | Phase 1 | Pending |
+| MKT-02 | Phase 1 | Pending |
+| MKT-03 | Phase 1 | Pending |
+| MKT-04 | Phase 1 | Pending |
+| MKT-05 | Phase 1 | Pending |
+| MKT-06 | Phase 1 | Pending |
+| MKT-07 | Phase 1 | Pending |
+| WATCH-01 | Phase 2 | Pending |
+| WATCH-02 | Phase 2 | Pending |
+| WATCH-03 | Phase 2 | Pending |
+| WATCH-04 | Phase 2 | Pending |
+| PORT-01 | Phase 2 | Pending |
+| PORT-02 | Phase 2 | Pending |
+| PORT-03 | Phase 2 | Pending |
+| PORT-04 | Phase 2 | Pending |
+| PORT-05 | Phase 2 | Pending |
+| PORT-06 | Phase 2 | Pending |
+| PORT-07 | Phase 2 | Pending |
+| PORT-08 | Phase 2 | Pending |
+| CHAT-01 | Phase 3 | Pending |
+| CHAT-02 | Phase 3 | Pending |
+| CHAT-03 | Phase 3 | Pending |
+| CHAT-04 | Phase 3 | Pending |
+| CHAT-05 | Phase 3 | Pending |
+| CHAT-06 | Phase 3 | Pending |
+| CHAT-07 | Phase 3 | Pending |
+| CHAT-08 | Phase 3 | Pending |
+| CHAT-09 | Phase 3 | Pending |
+| UI-WATCH-01 | Phase 4 | Pending |
+| UI-WATCH-02 | Phase 4 | Pending |
+| UI-WATCH-03 | Phase 4 | Pending |
+| UI-WATCH-04 | Phase 4 | Pending |
+| UI-CHART-01 | Phase 4 | Pending |
+| UI-HEAT-01 | Phase 5 | Pending |
+| UI-HEAT-02 | Phase 5 | Pending |
+| UI-PNL-01 | Phase 5 | Pending |
+| UI-POS-01 | Phase 5 | Pending |
+| UI-TRADE-01 | Phase 5 | Pending |
+| UI-CHAT-01 | Phase 5 | Pending |
+| UI-CHAT-02 | Phase 5 | Pending |
+| UI-CHAT-03 | Phase 5 | Pending |
+| UI-LAYOUT-01 | Phase 4 | Pending |
+| UI-LAYOUT-02 | Phase 4 | Pending |
+| UI-LAYOUT-03 | Phase 4 | Pending |
+| UI-LAYOUT-04 | Phase 4 | Pending |
+| DB-01 | Phase 1 | Pending |
+| DB-02 | Phase 1 | Pending |
+| DB-03 | Phase 1 | Pending |
+| INFRA-01 | Phase 6 | Pending |
+| INFRA-02 | Phase 6 | Pending |
+| INFRA-03 | Phase 6 | Pending |
+| INFRA-04 | Phase 6 | Pending |
+| INFRA-05 | Phase 1 | Pending |
+| INFRA-06 | Phase 1 | Pending |
+| TEST-01 | Phase 6 | Pending |
+| TEST-02 | Phase 6 | Pending |
+| TEST-03 | Phase 6 | Pending |
+| TEST-04 | Phase 6 | Pending |
+| TEST-05 | Phase 6 | Pending |
+| TEST-06 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 55 total
-- Mapped to phases: 0
-- Unmapped: 55
+- Mapped to phases: 55
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-09 after initial definition*
+*Last updated: 2026-04-09 after roadmap creation*
