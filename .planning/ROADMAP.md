@@ -31,12 +31,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Connecting to GET /api/stream/prices with curl or EventSource receives a continuous stream of SSE price events for all watchlist tickers at ~500ms cadence
   4. Price events include ticker, price, previous_price, session_open_price, timestamp, and change_direction fields with realistic values from the GBM simulator
   5. .env.example exists documenting all environment variables
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
-- [ ] 01-03: TBD
+- [ ] 01-01-PLAN.md — Restore environment, verify tests, create .env.example, upgrade health endpoint
+- [ ] 01-02-PLAN.md — Integration verification: server startup, DB init, SSE streaming end-to-end
 
 ### Phase 2: Watchlist & Portfolio APIs
 **Goal**: Users can manage their watchlist and execute trades through REST API endpoints
@@ -130,7 +129,7 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Market Data Engine | 0/3 | Not started | - |
+| 1. Foundation & Market Data Engine | 0/2 | Planning complete | - |
 | 2. Watchlist & Portfolio APIs | 0/3 | Not started | - |
 | 3. AI Chat Backend | 0/2 | Not started | - |
 | 4. Frontend Shell & Live Data | 0/3 | Not started | - |
