@@ -78,11 +78,11 @@ Plans:
   2. The watchlist panel displays all tickers with current price, session change %, and sparkline mini-charts that fill in progressively from SSE data
   3. Prices flash green on uptick and red on downtick with a ~500ms CSS fade animation
   4. Clicking a ticker in the watchlist displays a larger detailed price chart in the main chart area
-**Plans:** 3 plans
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] 04-01-PLAN.md — Scaffold Next.js, Tailwind dark theme, layout shell with header and connection dot
-- [ ] 04-02-PLAN.md — Zustand price store, SSE hook, watchlist panel with flash animations and sparklines
+- [x] 04-02-PLAN.md — Zustand price store, SSE hook, watchlist panel with flash animations and sparklines
 - [ ] 04-03-PLAN.md — Main chart area with Lightweight Charts, visual verification checkpoint
 
 ### Phase 5: Frontend Portfolio & Trading
@@ -130,6 +130,6 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 | 1. Foundation & Market Data Engine | 2/2 | Complete | - |
 | 2. Watchlist & Portfolio APIs | 2/2 | Complete | - |
 | 3. AI Chat Backend | 1/2 | In Progress|  |
-| 4. Frontend Shell & Live Data | 0/3 | Not started | - |
+| 4. Frontend Shell & Live Data | 2/3 | In Progress|  |
 | 5. Frontend Portfolio & Trading | 0/3 | Not started | - |
 | 6. Infrastructure & Testing | 0/3 | Not started | - |

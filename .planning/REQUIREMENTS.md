@@ -47,10 +47,10 @@
 
 ### Frontend - Watchlist
 
-- [ ] **UI-WATCH-01**: Watchlist panel shows ticker, price, session change %, sparkline per ticker
-- [ ] **UI-WATCH-02**: Prices flash green (uptick) or red (downtick) with ~500ms CSS fade
-- [ ] **UI-WATCH-03**: Sparklines accumulate from SSE data since page load
-- [ ] **UI-WATCH-04**: Clicking a ticker selects it for the main chart
+- [x] **UI-WATCH-01**: Watchlist panel shows ticker, price, session change %, sparkline per ticker
+- [x] **UI-WATCH-02**: Prices flash green (uptick) or red (downtick) with ~500ms CSS fade
+- [x] **UI-WATCH-03**: Sparklines accumulate from SSE data since page load
+- [x] **UI-WATCH-04**: Clicking a ticker selects it for the main chart
 
 ### Frontend - Charts & Portfolio
 
@@ -153,10 +153,10 @@
 | CHAT-07 | Phase 3 | Complete |
 | CHAT-08 | Phase 3 | Complete |
 | CHAT-09 | Phase 3 | Complete |
-| UI-WATCH-01 | Phase 4 | Pending |
-| UI-WATCH-02 | Phase 4 | Pending |
-| UI-WATCH-03 | Phase 4 | Pending |
-| UI-WATCH-04 | Phase 4 | Pending |
+| UI-WATCH-01 | Phase 4 | Complete |
+| UI-WATCH-02 | Phase 4 | Complete |
+| UI-WATCH-03 | Phase 4 | Complete |
+| UI-WATCH-04 | Phase 4 | Complete |
 | UI-CHART-01 | Phase 4 | Pending |
 | UI-HEAT-01 | Phase 5 | Pending |
 | UI-HEAT-02 | Phase 5 | Pending |
