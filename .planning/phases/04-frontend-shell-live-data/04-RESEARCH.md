@@ -396,17 +396,17 @@ These are the exact response shapes from the implemented backend code:
 | A5 | Tailwind v4 uses CSS-based configuration instead of JS config | Pitfalls | High -- scaffolding approach depends on which version create-next-app installs |
 | A6 | Zustand getState() avoids stale closure problem in EventSource callbacks | Pitfalls | Medium -- if wrong, price updates won't reflect in UI |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Tailwind v4 vs v3 in create-next-app**
+1. **Tailwind v4 vs v3 in create-next-app** (RESOLVED)
    - What we know: Tailwind v4.2.2 is current; `create-next-app` may install v3 or v4 depending on template
    - What's unclear: Which version the Next.js 16 template uses by default
-   - Recommendation: After scaffolding, check installed version and configure accordingly. If v4, use `@theme` in CSS. If v3, use `tailwind.config.ts`.
+   - Resolution: Plan 04-01, Task 1, Step 3 includes conditional logic -- check installed version after scaffolding and configure with `@theme` (v4) or `tailwind.config.ts` (v3). No ambiguity remains for the executor.
 
-2. **Lightweight Charts v5 React Integration**
+2. **Lightweight Charts v5 React Integration** (RESOLVED)
    - What we know: TradingView provides official React tutorials for Lightweight Charts
    - What's unclear: Whether v5 has any breaking changes from the tutorial examples (most tutorials are for v4)
-   - Recommendation: Use the imperative `useRef` + `useEffect` pattern from TradingView's official React tutorial; this is stable across versions
+   - Resolution: Plan 04-03, Task 1 uses the imperative `useRef` + `useEffect` + dynamic import pattern from TradingView's official React tutorial. This pattern is stable across v4/v5 as it uses the core `createChart` and `addLineSeries` APIs which have not changed.
 
 ## Environment Availability
 
