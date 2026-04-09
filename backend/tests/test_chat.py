@@ -10,6 +10,7 @@ Requirements tested:
 
 from __future__ import annotations
 
+import json
 import os
 import tempfile
 
@@ -18,6 +19,7 @@ _tmp = tempfile.mkdtemp()
 os.environ["DB_PATH"] = os.path.join(_tmp, "test_chat.db")
 os.environ["LLM_MOCK"] = "true"
 
+import litellm  # noqa: E402
 import pytest  # noqa: E402
 from httpx import ASGITransport, AsyncClient  # noqa: E402
 from pydantic import ValidationError  # noqa: E402
@@ -231,3 +233,254 @@ class TestMockMode:
         data = resp.json()
         assert data["trades"] == []
         assert data["watchlist_changes"] == []
+
+
+# ---------------------------------------------------------------------------
+# Mock helpers for monkeypatching litellm.completion
+# ---------------------------------------------------------------------------
+
+
+class _MockChoice:
+    """Minimal mock of litellm response choice."""
+
+    def __init__(self, content: str):
+        self.message = type("M", (), {"content": content})()
+
+
+class _MockLLMResponse:
+    """Minimal mock of litellm completion response."""
+
+    def __init__(self, content: str):
+        self.choices = [_MockChoice(content)]
+
+
+def _make_mock_completion(response_dict: dict):
+    """Return a callable that mimics litellm.completion with a fixed JSON response."""
+    content = json.dumps(response_dict)
+    return lambda **kwargs: _MockLLMResponse(content)
+
+
+@pytest.fixture
+def disable_mock():
+    """Temporarily set LLM_MOCK=false so the real (monkeypatched) LLM path executes."""
+    original = os.environ.get("LLM_MOCK", "true")
+    os.environ["LLM_MOCK"] = "false"
+    yield
+    os.environ["LLM_MOCK"] = original
+
+
+# ---------------------------------------------------------------------------
+# CHAT-05, CHAT-06: Auto-execution of trades and watchlist changes
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.usefixtures("disable_mock")
+class TestAutoExecution:
+    """Verify LLM-specified trades and watchlist changes auto-execute (CHAT-05, CHAT-06)."""
+
+    async def test_trade_auto_executes_buy(self, client: AsyncClient, monkeypatch):
+        """LLM response with a buy trade auto-executes and updates portfolio (CHAT-05)."""
+        _inject_price("AAPL", 150.0)
+        mock_fn = _make_mock_completion({
+            "message": "Buying AAPL for you",
+            "trades": [{"ticker": "AAPL", "side": "buy", "quantity": 5}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Buy 5 AAPL"})
+        assert resp.status_code == 200
+        data = resp.json()
+
+        assert len(data["trades"]) == 1
+        assert data["trades"][0]["ticker"] == "AAPL"
+        assert data["trades"][0]["side"] == "buy"
+        assert data["trades"][0]["quantity"] == 5
+        assert data["trades"][0]["price"] == 150.0
+
+        # Verify portfolio was actually updated
+        portfolio = await client.get("/api/portfolio")
+        pdata = portfolio.json()
+        aapl_pos = [p for p in pdata["positions"] if p["ticker"] == "AAPL"]
+        assert len(aapl_pos) >= 1
+        assert aapl_pos[0]["quantity"] >= 5
+
+    async def test_trade_auto_executes_sell(self, client: AsyncClient, monkeypatch):
+        """LLM response with a sell trade reduces position (CHAT-05)."""
+        _inject_price("MSFT", 400.0)
+        # First buy manually
+        buy_resp = await client.post(
+            "/api/portfolio/trade",
+            json={"ticker": "MSFT", "side": "buy", "quantity": 10},
+        )
+        assert buy_resp.json()["success"] is True
+
+        # Now monkeypatch LLM to sell 3
+        mock_fn = _make_mock_completion({
+            "message": "Selling 3 MSFT",
+            "trades": [{"ticker": "MSFT", "side": "sell", "quantity": 3}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Sell 3 MSFT"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["trades"]) == 1
+        assert data["trades"][0]["side"] == "sell"
+
+    async def test_watchlist_add_auto_executes(self, client: AsyncClient, monkeypatch):
+        """LLM response with watchlist add auto-executes (CHAT-06)."""
+        mock_fn = _make_mock_completion({
+            "message": "Adding PYPL to watchlist",
+            "trades": [],
+            "watchlist_changes": [{"ticker": "PYPL", "action": "add"}],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Add PYPL"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["watchlist_changes"]) == 1
+        assert data["watchlist_changes"][0]["ticker"] == "PYPL"
+        assert data["watchlist_changes"][0]["action"] == "add"
+        assert data["watchlist_changes"][0]["success"] is True
+
+        # Verify watchlist updated
+        wl = await client.get("/api/watchlist")
+        tickers = [item["ticker"] for item in wl.json()]
+        assert "PYPL" in tickers
+
+    async def test_watchlist_remove_auto_executes(self, client: AsyncClient, monkeypatch):
+        """LLM response with watchlist remove auto-executes (CHAT-06)."""
+        # Ensure NFLX is in watchlist (it's seeded by default)
+        mock_fn = _make_mock_completion({
+            "message": "Removing NFLX from watchlist",
+            "trades": [],
+            "watchlist_changes": [{"ticker": "NFLX", "action": "remove"}],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Remove NFLX"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["watchlist_changes"]) == 1
+        assert data["watchlist_changes"][0]["action"] == "remove"
+
+    async def test_trade_auto_adds_to_watchlist(self, client: AsyncClient, monkeypatch):
+        """Buying a ticker not in watchlist auto-adds it before executing (CHAT-05)."""
+        _inject_price("SQ", 80.0)
+        mock_fn = _make_mock_completion({
+            "message": "Buying SQ",
+            "trades": [{"ticker": "SQ", "side": "buy", "quantity": 2}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Buy 2 SQ"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["trades"]) == 1
+
+        # Verify SQ was added to watchlist
+        wl = await client.get("/api/watchlist")
+        tickers = [item["ticker"] for item in wl.json()]
+        assert "SQ" in tickers
+
+
+# ---------------------------------------------------------------------------
+# CHAT-07: Failed trade errors
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.usefixtures("disable_mock")
+class TestFailedTrades:
+    """Verify failed trades produce error messages in chat response (CHAT-07)."""
+
+    async def test_insufficient_cash_error_in_response(self, client: AsyncClient, monkeypatch):
+        """Buying more than cash allows produces Insufficient cash error (CHAT-07)."""
+        _inject_price("GOOGL", 500.0)
+        mock_fn = _make_mock_completion({
+            "message": "Buying 1000 GOOGL",
+            "trades": [{"ticker": "GOOGL", "side": "buy", "quantity": 1000}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Buy 1000 GOOGL"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert any("Insufficient cash" in e for e in data["errors"])
+
+    async def test_no_price_error_in_response(self, client: AsyncClient, monkeypatch):
+        """Buying a ticker with no cached price produces No price for error (CHAT-07)."""
+        mock_fn = _make_mock_completion({
+            "message": "Buying ZZZZZ",
+            "trades": [{"ticker": "ZZZZZ", "side": "buy", "quantity": 1}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Buy ZZZZZ"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert any("No price for" in e for e in data["errors"])
+
+    async def test_failed_trade_error_appended_to_message(self, client: AsyncClient, monkeypatch):
+        """Trade errors are appended to the assistant message text (CHAT-07)."""
+        mock_fn = _make_mock_completion({
+            "message": "Trying to buy",
+            "trades": [{"ticker": "NOPRZ", "side": "buy", "quantity": 1}],
+            "watchlist_changes": [],
+        })
+        monkeypatch.setattr(litellm, "completion", mock_fn)
+
+        resp = await client.post("/api/chat", json={"message": "Buy NOPRZ"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "could not execute" in data["message"].lower() or "No price for" in data["message"]
+
+
+# ---------------------------------------------------------------------------
+# CHAT-08: LLM failure handling
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.usefixtures("disable_mock")
+class TestLLMFailureHandling:
+    """Verify LLM failures return 200 with fallback message (CHAT-08)."""
+
+    async def test_llm_exception_returns_200_with_fallback(self, client: AsyncClient, monkeypatch):
+        """ConnectionError from LLM returns 200 with trouble connecting message (CHAT-08)."""
+        def _raise(**kwargs):
+            raise ConnectionError("simulated failure")
+        monkeypatch.setattr(litellm, "completion", _raise)
+
+        resp = await client.post("/api/chat", json={"message": "Hello"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "trouble connecting" in data["message"].lower()
+
+    async def test_llm_failure_saves_messages_to_db(self, client: AsyncClient, monkeypatch):
+        """LLM failure still saves user and fallback assistant messages to DB (CHAT-08)."""
+        from app.db.queries import get_chat_history
+
+        def _raise(**kwargs):
+            raise RuntimeError("simulated LLM down")
+        monkeypatch.setattr(litellm, "completion", _raise)
+
+        await client.post("/api/chat", json={"message": "Failure DB test"})
+
+        history = await get_chat_history(limit=50)
+        messages = [m["content"] for m in history]
+        assert "Failure DB test" in messages
+        assert any("trouble connecting" in m.lower() for m in messages)
+
+    async def test_llm_malformed_json_returns_fallback(self, client: AsyncClient, monkeypatch):
+        """Malformed JSON from LLM triggers Pydantic error, returns fallback (CHAT-08)."""
+        monkeypatch.setattr(litellm, "completion", lambda **kwargs: _MockLLMResponse("not valid json"))
+
+        resp = await client.post("/api/chat", json={"message": "Malformed test"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "trouble connecting" in data["message"].lower()
