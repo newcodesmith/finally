@@ -81,7 +81,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Scaffold Next.js, Tailwind dark theme, layout shell with header and connection dot
+- [x] 04-01-PLAN.md — Scaffold Next.js, Tailwind dark theme, layout shell with header and connection dot
 - [ ] 04-02-PLAN.md — Zustand price store, SSE hook, watchlist panel with flash animations and sparklines
 - [ ] 04-03-PLAN.md — Main chart area with Lightweight Charts, visual verification checkpoint
 

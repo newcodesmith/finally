@@ -69,10 +69,10 @@
 
 ### Frontend - Layout & Design
 
-- [ ] **UI-LAYOUT-01**: Dark terminal-inspired theme (backgrounds ~#0d1117 or #1a1a2e)
-- [ ] **UI-LAYOUT-02**: Header with portfolio total value, connection status indicator, cash balance
-- [ ] **UI-LAYOUT-03**: Connection status dot (green/yellow/red)
-- [ ] **UI-LAYOUT-04**: Accent colors: yellow #ecad0a, blue #209dd7, purple #753991
+- [x] **UI-LAYOUT-01**: Dark terminal-inspired theme (backgrounds ~#0d1117 or #1a1a2e)
+- [x] **UI-LAYOUT-02**: Header with portfolio total value, connection status indicator, cash balance
+- [x] **UI-LAYOUT-03**: Connection status dot (green/yellow/red)
+- [x] **UI-LAYOUT-04**: Accent colors: yellow #ecad0a, blue #209dd7, purple #753991
 
 ### Database
 
@@ -166,10 +166,10 @@
 | UI-CHAT-01 | Phase 5 | Pending |
 | UI-CHAT-02 | Phase 5 | Pending |
 | UI-CHAT-03 | Phase 5 | Pending |
-| UI-LAYOUT-01 | Phase 4 | Pending |
-| UI-LAYOUT-02 | Phase 4 | Pending |
-| UI-LAYOUT-03 | Phase 4 | Pending |
-| UI-LAYOUT-04 | Phase 4 | Pending |
+| UI-LAYOUT-01 | Phase 4 | Complete |
+| UI-LAYOUT-02 | Phase 4 | Complete |
+| UI-LAYOUT-03 | Phase 4 | Complete |
+| UI-LAYOUT-04 | Phase 4 | Complete |
 | DB-01 | Phase 1 | Pending |
 | DB-02 | Phase 1 | Pending |
 | DB-03 | Phase 1 | Pending |
