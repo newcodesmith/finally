@@ -1,0 +1,47 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (rebuilt in container)
+node_modules
+frontend/node_modules
+backend/.venv
+.venv
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# Environment and secrets
+.env
+
+# Database (volume-mounted at runtime)
+db/finally.db
+
+# IDE / editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+frontend/out
+frontend/.next
+
+# Planning and docs (not needed in container)
+planning
+.claude
+*.md
+LICENSE
+
+# Test infrastructure
+test

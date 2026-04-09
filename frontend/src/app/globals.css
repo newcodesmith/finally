@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-surface: #161b22;
+  --bg-panel: #1a1a2e;
+  --border-color: #30363d;
+  --text-primary: #e6edf3;
+  --text-muted: #8b949e;
+  --accent-yellow: #ecad0a;
+  --accent-blue: #209dd7;
+  --accent-purple: #753991;
+  --price-up: #3fb950;
+  --price-down: #f85149;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Price flash animations */
+.flash-up {
+  animation: flashGreen 500ms ease-out;
+}
+
+.flash-down {
+  animation: flashRed 500ms ease-out;
+}
+
+@keyframes flashGreen {
+  0% { background-color: rgba(63, 185, 80, 0.3); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+  0% { background-color: rgba(248, 81, 73, 0.3); }
+  100% { background-color: transparent; }
+}
+
+/* Sparkline container */
+.sparkline-container canvas {
+  display: block;
+}

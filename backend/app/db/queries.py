@@ -284,7 +284,7 @@ async def save_chat_message(
                 user_id,
                 role,
                 content,
-                json.dumps(actions) if actions else None,
+                json.dumps(actions) if actions is not None else None,
                 _now(),
             ),
         )

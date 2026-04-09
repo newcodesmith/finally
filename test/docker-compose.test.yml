@@ -1,0 +1,38 @@
+services:
+  # The FinAlly application container
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_PATH=/app/db/finally.db
+      - LLM_MOCK=true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 5s
+      timeout: 5s
+      start_period: 15s
+      retries: 10
+
+  # Playwright test runner
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.48.0-noble
+    depends_on:
+      app:
+        condition: service_healthy
+    working_dir: /tests
+    volumes:
+      - ./:/tests
+      - ./test-results:/tests/test-results
+      - ./playwright-report:/tests/playwright-report
+    environment:
+      - BASE_URL=http://app:8000
+      - SKIP_WEB_SERVER=true
+    command: >
+      bash -c "
+        npm ci &&
+        npx playwright install chromium &&
+        npx playwright test --reporter=list
+      "
