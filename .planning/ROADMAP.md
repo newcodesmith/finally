@@ -50,8 +50,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Verify watchlist API endpoints with integration tests
-- [ ] 02-02-PLAN.md — Verify portfolio trade execution, P&L, and snapshots with integration tests
+- [x] 02-01-PLAN.md — Verify watchlist API endpoints with integration tests
+- [x] 02-02-PLAN.md — Verify portfolio trade execution, P&L, and snapshots with integration tests
 
 ### Phase 3: AI Chat Backend
 **Goal**: Users can chat with an AI assistant that analyzes their portfolio and executes trades through natural language
