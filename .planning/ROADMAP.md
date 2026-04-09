@@ -63,10 +63,10 @@ Plans:
   3. Trades and watchlist changes specified in the LLM response are auto-executed, with results (including any validation errors) reflected in the response
   4. When LLM_MOCK=true, the endpoint returns deterministic mock responses without calling OpenRouter
   5. LLM failures (network errors, malformed responses) return a graceful fallback message with HTTP 200, never a 500
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
-- [ ] 03-01-PLAN.md — Integration tests for chat endpoint baseline: structured response, context, history, schema, mock mode
+- [x] 03-01-PLAN.md — Integration tests for chat endpoint baseline: structured response, context, history, schema, mock mode
 - [ ] 03-02-PLAN.md — Integration tests for auto-execution pipeline and LLM error handling
 
 ### Phase 4: Frontend Shell & Live Data
@@ -130,7 +130,7 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 |-------|----------------|--------|-----------|
 | 1. Foundation & Market Data Engine | 2/2 | Complete | - |
 | 2. Watchlist & Portfolio APIs | 2/2 | Complete | - |
-| 3. AI Chat Backend | 0/2 | Planning complete | - |
+| 3. AI Chat Backend | 1/2 | In Progress|  |
 | 4. Frontend Shell & Live Data | 0/3 | Not started | - |
 | 5. Frontend Portfolio & Trading | 0/3 | Not started | - |
 | 6. Infrastructure & Testing | 0/3 | Not started | - |
