@@ -34,15 +34,12 @@ Declared values (must be multiples of 4):
 | Token | Value | Usage |
 |-------|-------|-------|
 | xs | 4px | Icon gaps, ticker symbol to price spacing |
-| sm | 8px | Watchlist row internal padding, compact element spacing |
-| md | 12px | Watchlist cell padding, inline grouping |
-| lg | 16px | Panel internal padding, section spacing |
+| sm | 8px | Watchlist row internal padding, compact element spacing, inline grouping |
+| lg | 16px | Panel internal padding, section spacing, watchlist cell horizontal padding |
 | xl | 24px | Panel-to-panel gaps, header padding |
 | 2xl | 32px | Major layout gaps |
 
 Exceptions: none
-
-**Note:** The 12px value (md) is used because data-dense trading terminals need a spacing step between 8px and 16px for table cells and compact list items.
 
 ---
 
@@ -52,7 +49,7 @@ Exceptions: none
 |------|------|--------|-------------|-------|
 | Data | 13px | 400 (regular) | 1.4 | Watchlist prices, table values, ticker symbols |
 | Body | 14px | 400 (regular) | 1.5 | General text, labels, descriptions |
-| Label | 11px | 500 (medium) | 1.3 | Column headers, section labels, change % badges |
+| Label | 11px | 600 (semibold) | 1.3 | Column headers, section labels, change % badges |
 | Heading | 20px | 600 (semibold) | 1.2 | Panel titles (not many in a terminal UI) |
 
 **Font stacking:** `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
@@ -161,11 +158,11 @@ Each watchlist row is a clickable element with the following structure:
 
 | Element | Style |
 |---------|-------|
-| Ticker symbol | 13px, weight 500, primary text color |
-| Current price | 13px, weight 400, primary text color, tabular-nums |
-| Session change % | 11px, weight 500, green if positive / red if negative / muted if zero |
+| Ticker symbol | 13px, weight 600 (semibold), primary text color |
+| Current price | 13px, weight 400 (regular), primary text color, tabular-nums |
+| Session change % | 11px, weight 600 (semibold), green if positive / red if negative / muted if zero |
 | Sparkline | 60px wide x 24px tall, stroke color blue `#209dd7`, no fill, 1px stroke width |
-| Row padding | 8px vertical, 12px horizontal |
+| Row padding | 8px vertical, 16px horizontal |
 | Row hover | background `#1c2333` |
 | Selected row | background `#1c2333`, left border 2px solid yellow `#ecad0a` |
 | Row divider | 1px solid `#30363d` (bottom border) |
