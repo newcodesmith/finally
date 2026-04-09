@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from collections.abc import Awaitable, Callable
 from datetime import datetime, timezone
 
 from massive import RESTClient
@@ -31,10 +32,12 @@ class MassiveDataSource(MarketDataSource):
         api_key: str,
         price_cache: PriceCache,
         poll_interval: float = 15.0,
+        snapshot_callback: Callable[[], Awaitable[None]] | None = None,
     ) -> None:
         self._api_key = api_key
         self._cache = price_cache
         self._interval = poll_interval
+        self._snapshot_callback = snapshot_callback
         self._tickers: list[str] = []
         self._task: asyncio.Task | None = None
         self._client: RESTClient | None = None
@@ -86,6 +89,11 @@ class MassiveDataSource(MarketDataSource):
         while True:
             await asyncio.sleep(self._interval)
             await self._poll_once()
+            if self._snapshot_callback:
+                try:
+                    await self._snapshot_callback()
+                except Exception:
+                    logger.exception("Portfolio snapshot failed")
 
     async def _poll_once(self) -> None:
         """Execute one poll cycle: fetch snapshots, update cache."""
@@ -103,10 +111,13 @@ class MassiveDataSource(MarketDataSource):
                     # Massive timestamps are Unix milliseconds → convert to ISO string
                     ts_seconds = snap.last_trade.timestamp / 1000.0
                     timestamp = datetime.fromtimestamp(ts_seconds, tz=timezone.utc).isoformat()
+                    # Pass session_open_price on every update; PriceCache only
+                    # stores it on the first update so subsequent calls are no-ops.
                     self._cache.update(
                         ticker=snap.ticker,
                         price=price,
                         timestamp=timestamp,
+                        session_open_price=price,
                     )
                     processed += 1
                 except (AttributeError, TypeError) as e:

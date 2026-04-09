@@ -3,7 +3,8 @@
 **Reviewed by:** Claude Code  
 **Date:** 2026-04-03  
 **Scope:** `backend/app/market/` (8 modules), `backend/app/main.py`, `backend/app/api/watchlist.py`, `backend/app/api/portfolio.py`, `backend/tests/market/` (6 modules)  
-**Test result:** 80 passed, 0 failed
+**Test result:** 100 passed, 0 failed (after fixes applied; was 80 passed before)  
+**Status:** All issues from this review resolved on branch `fix/market-data-review`
 
 ---
 

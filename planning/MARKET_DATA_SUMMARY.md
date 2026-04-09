@@ -44,23 +44,25 @@ MarketDataSource (ABC)
 
 ## Test Suite
 
-**73 tests, all passing.** 6 test modules in `backend/tests/market/`.
+**100 tests, all passing.** 7 test modules in `backend/tests/market/`.
 
 | Module | Tests | Coverage |
 |--------|-------|----------|
-| test_models.py | 11 | models.py: 100% |
-| test_cache.py | 13 | cache.py: 100% |
-| test_simulator.py | 17 | simulator.py: 98% |
-| test_simulator_source.py | 10 | (integration tests) |
+| test_models.py | 13 | models.py: 100% |
+| test_cache.py | 18 | cache.py: 100% |
+| test_simulator.py | 19 | simulator.py: 95% |
+| test_simulator_source.py | 12 | (integration tests) |
 | test_factory.py | 7 | factory.py: 100% |
-| test_massive.py | 13 | massive_client.py: 56% (expected — API methods mocked) |
+| test_massive.py | 20 | massive_client.py: 94% |
+| test_stream.py | 14 | stream.py: 90% |
 
-Overall coverage: 84%.
+Overall market package coverage: ~96%.
 
 ## Code Review & Fixes Applied
 
-A comprehensive code review identified 7 issues. All were resolved:
+A comprehensive code review identified and resolved all issues:
 
+**Round 1 (initial build):**
 1. **pyproject.toml build config** — added `[tool.hatch.build.targets.wheel] packages = ["app"]`
 2. **Lazy imports removed** — `massive` is a core dependency; imports moved to top level
 3. **SSE return type fixed** — `_generate_events` annotated as `AsyncGenerator[str, None]`
@@ -68,6 +70,21 @@ A comprehensive code review identified 7 issues. All were resolved:
 5. **Correlation constants cleaned up** — removed unused `DEFAULT_CORR`, consolidated into `CROSS_GROUP_CORR`
 6. **Unused test imports removed** — `pytest`, `math`, `asyncio` cleaned from 4 test files
 7. **Massive test mocks fixed** — `source._client` set in tests, patches target correct names
+
+**Round 2 (post-review):**
+8. **Stream router factory** (Bug #3) — moved `APIRouter()` creation inside `create_stream_router()` so each call returns a fresh router
+9. **Cholesky crash guard** (Bug #2) — `np.linalg.cholesky()` wrapped in try/except with identity-matrix fallback
+10. **Duplicate `_iso_now()` removed** (QC-2) — `cache.py` now imports `_iso_now` from `models.py`
+11. **`version` property lock-safe** (QC-4) — acquires `self._lock` before reading `_version`
+12. **MassiveDataSource snapshot callback** (P4) — accepts `snapshot_callback` constructor param; fires it after each poll cycle
+13. **Explicit `session_open_price`** (Bug #1) — `MassiveDataSource._poll_once()` explicitly passes `session_open_price=price` matching the simulator
+14. **Factory reads `MARKET_POLL_INTERVAL_SECONDS`** (P9) — Massive poller respects env var (default 15s)
+15. **`snapshot_callback` via factory** (P4) — `create_market_data_source()` accepts and threads `snapshot_callback` to both sources; `main.py` no longer uses private attribute injection
+16. **CLAUDE.md direction value** (P5) — `"flat"` corrected to `"unchanged"`
+17. **Unused `event_loop_policy` fixture removed** (Bug #4) — `tests/conftest.py` cleaned up
+18. **Private `_tickers` test assertion** (P10) — replaced `sim._tickers` with `sim.get_tickers()`
+19. **SSE tests added** (M1) — new `test_stream.py` covers retry directive, payload fields, version dedup, disconnect, empty cache, multi-ticker, and router factory isolation
+20. **Snapshot callback tests added** (M2, M3) — added to `test_simulator_source.py` and `test_massive.py`
 
 ## Demo
 

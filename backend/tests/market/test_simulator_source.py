@@ -136,3 +136,53 @@ class TestSimulatorDataSource:
         # Just verify it starts and stops cleanly
         await asyncio.sleep(0.2)
         await source.stop()
+
+    async def test_snapshot_callback_is_invoked(self):
+        """Snapshot callback is called after SNAPSHOT_TICKS ticks."""
+        cache = PriceCache()
+        call_count = 0
+
+        async def on_snapshot() -> None:
+            nonlocal call_count
+            call_count += 1
+
+        # Override SNAPSHOT_TICKS to 2 so the callback fires quickly in tests
+        original = SimulatorDataSource.SNAPSHOT_TICKS
+        SimulatorDataSource.SNAPSHOT_TICKS = 2
+        try:
+            source = SimulatorDataSource(
+                price_cache=cache,
+                update_interval=0.02,
+                snapshot_callback=on_snapshot,
+            )
+            await source.start(["AAPL"])
+            await asyncio.sleep(0.15)  # Enough for several SNAPSHOT_TICKS cycles
+            await source.stop()
+        finally:
+            SimulatorDataSource.SNAPSHOT_TICKS = original
+
+        assert call_count >= 1
+
+    async def test_snapshot_callback_exception_does_not_stop_simulator(self):
+        """An exception in the snapshot callback is swallowed; the simulator keeps running."""
+        cache = PriceCache()
+
+        async def failing_callback() -> None:
+            raise RuntimeError("snapshot error")
+
+        original = SimulatorDataSource.SNAPSHOT_TICKS
+        SimulatorDataSource.SNAPSHOT_TICKS = 2
+        try:
+            source = SimulatorDataSource(
+                price_cache=cache,
+                update_interval=0.02,
+                snapshot_callback=failing_callback,
+            )
+            await source.start(["AAPL"])
+            await asyncio.sleep(0.15)
+            # Task must still be running despite callback failures
+            assert source._task is not None
+            assert not source._task.done()
+            await source.stop()
+        finally:
+            SimulatorDataSource.SNAPSHOT_TICKS = original

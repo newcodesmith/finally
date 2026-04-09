@@ -170,7 +170,18 @@ class GBMSimulator:
                 corr[i, j] = rho
                 corr[j, i] = rho
 
-        self._cholesky = np.linalg.cholesky(corr)
+        try:
+            self._cholesky = np.linalg.cholesky(corr)
+        except np.linalg.LinAlgError:
+            # Correlation matrix is not positive definite (can happen with many
+            # unknown tickers all sharing CROSS_GROUP_CORR = 0.3). Fall back to
+            # uncorrelated moves so the simulator keeps running.
+            logger.warning(
+                "Correlation matrix is not positive definite for %d tickers; "
+                "falling back to uncorrelated moves",
+                n,
+            )
+            self._cholesky = np.eye(n)
 
     @staticmethod
     def _pairwise_correlation(t1: str, t2: str) -> float:

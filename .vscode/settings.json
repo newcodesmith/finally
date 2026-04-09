@@ -1,0 +1,19 @@
+{
+  "cSpell.words": [
+    "asyncio",
+    "conftest",
+    "dataclass",
+    "httpx",
+    "linalg",
+    "numpy",
+    "pytest",
+    "starlette",
+    "testclient",
+    "unstarted",
+    "upsert",
+    "watchlist",
+    "Starlette",
+    "Stmts",
+    "subclassing"
+  ]
+}
