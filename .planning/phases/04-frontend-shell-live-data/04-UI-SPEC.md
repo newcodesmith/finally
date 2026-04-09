@@ -138,9 +138,9 @@ Desktop-first, single-page layout. No scrolling on the main frame (panels scroll
 
 ### Header Layout
 
-Left-aligned: App name "FinAlly" in primary text, 16px semibold.
+Left-aligned: App name "FinAlly" in primary text, 14px semibold.
 Right-aligned cluster (8px gaps between items):
-- Portfolio total value: yellow `#ecad0a`, 16px semibold, prefixed with "$"
+- Portfolio total value: yellow `#ecad0a`, 14px semibold, prefixed with "$"
 - Separator: muted vertical line `#30363d`
 - Cash balance: secondary text `#8b949e`, 14px regular, label "Cash" + value
 - Connection status dot: 8px diameter circle with the appropriate status color
@@ -327,6 +327,6 @@ fontFamily:
 - [ ] Dimension 3 Color: PASS
 - [ ] Dimension 4 Typography: PASS
 - [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [ ] Dimension 6 Registry: PASS
 
 **Approval:** pending
