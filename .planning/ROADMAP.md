@@ -67,7 +67,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — Integration tests for chat endpoint baseline: structured response, context, history, schema, mock mode
-- [ ] 03-02-PLAN.md — Integration tests for auto-execution pipeline and LLM error handling
+- [x] 03-02-PLAN.md — Integration tests for auto-execution pipeline and LLM error handling
 
 ### Phase 4: Frontend Shell & Live Data
 **Goal**: Users see a dark, terminal-inspired interface with a live-updating watchlist, sparklines, and a main chart area

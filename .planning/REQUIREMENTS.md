@@ -39,10 +39,10 @@
 - [x] **CHAT-02**: LLM receives portfolio context (cash, positions, watchlist with prices, total value)
 - [x] **CHAT-03**: LLM receives last 20 chat messages as conversation history
 - [x] **CHAT-04**: Structured output includes message, optional trades array, optional watchlist_changes array
-- [ ] **CHAT-05**: Trades from LLM auto-execute without confirmation
-- [ ] **CHAT-06**: Watchlist changes from LLM auto-execute
-- [ ] **CHAT-07**: Failed trades include error in chat response
-- [ ] **CHAT-08**: LLM failures return fallback message (never 500)
+- [x] **CHAT-05**: Trades from LLM auto-execute without confirmation
+- [x] **CHAT-06**: Watchlist changes from LLM auto-execute
+- [x] **CHAT-07**: Failed trades include error in chat response
+- [x] **CHAT-08**: LLM failures return fallback message (never 500)
 - [x] **CHAT-09**: LLM mock mode returns deterministic responses when LLM_MOCK=true
 
 ### Frontend - Watchlist
@@ -148,10 +148,10 @@
 | CHAT-02 | Phase 3 | Complete |
 | CHAT-03 | Phase 3 | Complete |
 | CHAT-04 | Phase 3 | Complete |
-| CHAT-05 | Phase 3 | Pending |
-| CHAT-06 | Phase 3 | Pending |
-| CHAT-07 | Phase 3 | Pending |
-| CHAT-08 | Phase 3 | Pending |
+| CHAT-05 | Phase 3 | Complete |
+| CHAT-06 | Phase 3 | Complete |
+| CHAT-07 | Phase 3 | Complete |
+| CHAT-08 | Phase 3 | Complete |
 | CHAT-09 | Phase 3 | Complete |
 | UI-WATCH-01 | Phase 4 | Pending |
 | UI-WATCH-02 | Phase 4 | Pending |
