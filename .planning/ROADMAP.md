@@ -47,12 +47,11 @@ Plans:
   3. POST /api/portfolio/trade executes a buy or sell at the current market price, updating cash balance and positions atomically
   4. GET /api/portfolio returns current positions with unrealized P&L calculated from live prices
   5. GET /api/portfolio/history returns time-series snapshots, with snapshots being recorded every 30 seconds and after each trade
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
-- [ ] 02-03: TBD
+- [ ] 02-01-PLAN.md — Verify watchlist API endpoints with integration tests
+- [ ] 02-02-PLAN.md — Verify portfolio trade execution, P&L, and snapshots with integration tests
 
 ### Phase 3: AI Chat Backend
 **Goal**: Users can chat with an AI assistant that analyzes their portfolio and executes trades through natural language
@@ -129,8 +128,8 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Market Data Engine | 0/2 | Planning complete | - |
-| 2. Watchlist & Portfolio APIs | 0/3 | Not started | - |
+| 1. Foundation & Market Data Engine | 2/2 | Complete | - |
+| 2. Watchlist & Portfolio APIs | 0/2 | Planning complete | - |
 | 3. AI Chat Backend | 0/2 | Not started | - |
 | 4. Frontend Shell & Live Data | 0/3 | Not started | - |
 | 5. Frontend Portfolio & Trading | 0/3 | Not started | - |
