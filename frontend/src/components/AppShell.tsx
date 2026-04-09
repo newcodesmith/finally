@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
+import Header from './Header';
 
 interface AppShellProps {
   sidebar?: ReactNode;
@@ -10,6 +11,13 @@ interface AppShellProps {
 export default function AppShell({ sidebar, children }: AppShellProps) {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-surface">
+      {/* Header — 48px fixed */}
+      <Header
+        portfolioValue={10000}
+        cashBalance={10000}
+        connectionStatus="disconnected"
+      />
+
       {/* Content area: sidebar + main */}
       <div className="flex flex-1 overflow-hidden">
         {/* Left sidebar — 280px fixed width */}
