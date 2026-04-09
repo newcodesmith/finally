@@ -7,8 +7,7 @@ from contextlib import asynccontextmanager
 
 import aiosqlite
 
-_default_db = os.path.join(os.path.dirname(__file__), "..", "..", "..", "db", "finally.db")
-DB_PATH = os.environ.get("DB_PATH", os.path.abspath(_default_db))
+DB_PATH = os.environ.get("DB_PATH", "./db/finally.db")
 
 
 @asynccontextmanager
