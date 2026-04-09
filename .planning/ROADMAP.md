@@ -78,13 +78,12 @@ Plans:
   2. The watchlist panel displays all tickers with current price, session change %, and sparkline mini-charts that fill in progressively from SSE data
   3. Prices flash green on uptick and red on downtick with a ~500ms CSS fade animation
   4. Clicking a ticker in the watchlist displays a larger detailed price chart in the main chart area
-**Plans**: TBD
-**UI hint**: yes
+**Plans:** 3 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
-- [ ] 04-03: TBD
+- [ ] 04-01-PLAN.md — Scaffold Next.js, Tailwind dark theme, layout shell with header and connection dot
+- [ ] 04-02-PLAN.md — Zustand price store, SSE hook, watchlist panel with flash animations and sparklines
+- [ ] 04-03-PLAN.md — Main chart area with Lightweight Charts, visual verification checkpoint
 
 ### Phase 5: Frontend Portfolio & Trading
 **Goal**: Users can trade, view portfolio visualizations, and interact with the AI assistant through the UI
