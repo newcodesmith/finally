@@ -87,7 +87,8 @@ class TestGenerateEvents:
         cache.update("AAPL", 190.50)
 
         # First event
-        MockRequest(disconnect_after_calls=3)
+        request = MockRequest(disconnect_after_calls=3)
+        events = []
 
         # Collect with manual update mid-stream is hard to orchestrate, so we
         # verify via version counter: two distinct cache updates → two events

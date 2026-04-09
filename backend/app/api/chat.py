@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+from typing import Optional
 
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
@@ -13,6 +14,7 @@ from ..db import (
     execute_trade,
     get_cash_balance,
     get_chat_history,
+    get_portfolio_history,
     get_positions,
     get_watchlist_tickers,
     record_portfolio_snapshot,
@@ -101,7 +103,7 @@ def _build_portfolio_context(
     price_cache,
 ) -> str:
     """Build a portfolio context string for the LLM system prompt."""
-    lines = ["PORTFOLIO CONTEXT:", f"Cash: ${cash:,.2f}"]
+    lines = [f"PORTFOLIO CONTEXT:", f"Cash: ${cash:,.2f}"]
 
     if positions:
         lines.append("\nPositions:")
