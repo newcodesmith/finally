@@ -110,12 +110,12 @@ Plans:
   3. Backend pytest suite passes covering market data, portfolio logic, LLM integration, and API routes
   4. Frontend component tests pass for key UI behaviors
   5. E2E Playwright tests pass against the containerized app with LLM_MOCK=true, verifying the core user flows
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
-- [ ] 06-03: TBD
+- [ ] 06-01-PLAN.md — Multi-stage Dockerfile and start/stop scripts
+- [ ] 06-02-PLAN.md — Backend test gap (health endpoint) and frontend Vitest component tests
+- [ ] 06-03-PLAN.md — E2E Playwright tests with docker-compose.test.yml
 
 ## Progress
 
