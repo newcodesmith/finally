@@ -53,10 +53,10 @@ test.describe('Trading', () => {
     await page.goto('/');
     await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
-    // Check initial portfolio
+    // Check initial portfolio (use relative assertions — prior tests may have modified state)
     const initialPortfolio = await page.request.get('/api/portfolio');
     const initialData = await initialPortfolio.json();
-    expect(initialData.cash_balance).toBe(10000);
+    const initialCash = initialData.cash_balance;
 
     // Execute a trade via API
     const tradeResponse = await page.request.post('/api/portfolio/trade', {
@@ -68,7 +68,7 @@ test.describe('Trading', () => {
     // Verify portfolio is updated
     const updatedPortfolio = await page.request.get('/api/portfolio');
     const updatedData = await updatedPortfolio.json();
-    expect(updatedData.cash_balance).toBeLessThan(10000);
+    expect(updatedData.cash_balance).toBeLessThan(initialCash);
     expect(updatedData.positions.length).toBeGreaterThan(0);
   });
 });
