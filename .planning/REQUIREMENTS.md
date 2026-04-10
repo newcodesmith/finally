@@ -55,14 +55,14 @@
 ### Frontend - Charts & Portfolio
 
 - [x] **UI-CHART-01**: Main chart area shows larger price chart for selected ticker
-- [ ] **UI-HEAT-01**: Portfolio heatmap (treemap) with positions sized by weight, colored by P&L
-- [ ] **UI-HEAT-02**: Empty state shows placeholder message when no positions
-- [ ] **UI-PNL-01**: P&L line chart shows portfolio value over time from snapshots
-- [ ] **UI-POS-01**: Positions table shows ticker, quantity, avg cost, current price, unrealized P&L, % change
+- [x] **UI-HEAT-01**: Portfolio heatmap (treemap) with positions sized by weight, colored by P&L
+- [x] **UI-HEAT-02**: Empty state shows placeholder message when no positions
+- [x] **UI-PNL-01**: P&L line chart shows portfolio value over time from snapshots
+- [x] **UI-POS-01**: Positions table shows ticker, quantity, avg cost, current price, unrealized P&L, % change
 
 ### Frontend - Trading & Chat
 
-- [ ] **UI-TRADE-01**: Trade bar with ticker field, quantity field, buy button, sell button
+- [x] **UI-TRADE-01**: Trade bar with ticker field, quantity field, buy button, sell button
 - [ ] **UI-CHAT-01**: Docked/collapsible AI chat panel with message history
 - [ ] **UI-CHAT-02**: Loading indicator while waiting for LLM response
 - [ ] **UI-CHAT-03**: Trade executions and watchlist changes shown inline as confirmations
@@ -158,11 +158,11 @@
 | UI-WATCH-03 | Phase 4 | Complete |
 | UI-WATCH-04 | Phase 4 | Complete |
 | UI-CHART-01 | Phase 4 | Complete |
-| UI-HEAT-01 | Phase 5 | Pending |
-| UI-HEAT-02 | Phase 5 | Pending |
-| UI-PNL-01 | Phase 5 | Pending |
-| UI-POS-01 | Phase 5 | Pending |
-| UI-TRADE-01 | Phase 5 | Pending |
+| UI-HEAT-01 | Phase 5 | Complete |
+| UI-HEAT-02 | Phase 5 | Complete |
+| UI-PNL-01 | Phase 5 | Complete |
+| UI-POS-01 | Phase 5 | Complete |
+| UI-TRADE-01 | Phase 5 | Complete |
 | UI-CHAT-01 | Phase 5 | Pending |
 | UI-CHAT-02 | Phase 5 | Pending |
 | UI-CHAT-03 | Phase 5 | Pending |
