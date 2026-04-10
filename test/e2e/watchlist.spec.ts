@@ -29,8 +29,9 @@ test.describe('Watchlist Management', () => {
     // Reload to verify removal
     await page.reload();
     await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
-    // NFLX should no longer appear
-    await expect(page.getByText('NFLX')).not.toBeVisible({ timeout: 5000 });
+    // NFLX should no longer appear in the watchlist
+    const watchlistPanel = page.locator('[data-testid="watchlist"]');
+    await expect(watchlistPanel.getByText('NFLX')).not.toBeVisible({ timeout: 5000 });
   });
 
   test('clicking a ticker in the watchlist selects it', async ({ page }) => {

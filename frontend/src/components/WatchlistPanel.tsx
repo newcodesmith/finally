@@ -11,7 +11,7 @@ export default function WatchlistPanel() {
   const sortedTickers = [...tickers].sort();
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col" data-testid="watchlist">
       {/* Header */}
       <div className="px-4 py-3 border-b border-border">
         <span className="text-[11px] font-semibold text-text-secondary uppercase tracking-wider">
