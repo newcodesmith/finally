@@ -5,6 +5,8 @@ import PriceCell from './PriceCell';
 import ChangePercent from './ChangePercent';
 import Sparkline from './Sparkline';
 
+const EMPTY_ARRAY: number[] = [];
+
 interface WatchlistRowProps {
   ticker: string;
   isSelected: boolean;
@@ -13,7 +15,7 @@ interface WatchlistRowProps {
 
 export default function WatchlistRow({ ticker, isSelected, onClick }: WatchlistRowProps) {
   const priceData = usePriceStore((s) => s.prices[ticker]);
-  const sparklineData = usePriceStore((s) => s.sparklineHistory[ticker] ?? []);
+  const sparklineData = usePriceStore((s) => s.sparklineHistory[ticker]) ?? EMPTY_ARRAY;
 
   const sessionChange =
     priceData && priceData.session_open_price

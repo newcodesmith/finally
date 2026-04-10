@@ -34,10 +34,16 @@ WORKDIR /app/backend
 RUN mkdir -p /app/db
 
 # Security: run as non-root user
-RUN adduser --disabled-password --no-create-home appuser
-RUN chown -R appuser:appuser /app/db
+RUN adduser --disabled-password --no-create-home appuser \
+    && chown -R appuser:appuser /app/db /app/backend
+
+VOLUME /app/db
+
 USER appuser
 
 EXPOSE 8000
+
+ENV UV_NO_CACHE=1
+ENV DB_PATH=/app/db/finally.db
 
 CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -48,7 +48,21 @@
       "WebSearch",
       "WebFetch(domain:fonts.googleapis.com)",
       "Skill(gsd:code-review-fix)",
-      "Skill(gsd:audit-milestone)"
+      "Skill(gsd:audit-milestone)",
+      "Bash(docker rm:*)",
+      "Bash(docker volume:*)",
+      "Bash(docker build:*)",
+      "Bash(docker run:*)",
+      "Bash(curl:*)",
+      "Bash(docker exec finally-app:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'{len\\(d\\)} tickers, first: {d[0][\\\\\"ticker\\\\\"]} @ \\\\${d[0][\\\\\"price\\\\\"]:.2f}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Cash: \\\\${d[\\\\\"cash_balance\\\\\"]:.2f}, Total: \\\\${d[\\\\\"total_value\\\\\"]:.2f}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Success: {d[\\\\\"success\\\\\"]}, Bought 5 AAPL @ \\\\${d[\\\\\"price\\\\\"]:.2f}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Cash: \\\\${d[\\\\\"cash_balance\\\\\"]:.2f}, Positions: {len\\(d[\\\\\"positions\\\\\"]\\)}, Total: \\\\${d[\\\\\"total_value\\\\\"]:.2f}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Success: {d[\\\\\"success\\\\\"]}, Sold 5 AAPL @ \\\\${d[\\\\\"price\\\\\"]:.2f}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Added: {d.get\\(\\\\\"ticker\\\\\",\\\\\"?\\\\\"\\)}'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Removed: {d.get\\(\\\\\"ticker\\\\\",\\\\\"?\\\\\"\\)}'\\)\")",
+      "Bash(npx playwright:*)"
     ]
   },
   "sandbox": {

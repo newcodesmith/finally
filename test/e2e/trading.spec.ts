@@ -4,7 +4,7 @@ test.describe('Trading', () => {
   test('can buy shares and see portfolio update', async ({ page }) => {
     await page.goto('/');
     // Wait for prices to stream so the trade bar can work
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // Fill in the trade bar — TradeBar has inputs with placeholders "Ticker" and "Qty"
     const tickerInput = page.getByPlaceholder('Ticker');
@@ -24,7 +24,7 @@ test.describe('Trading', () => {
     // the cash should be less than $10,000
     const headerCash = page.locator('header');
     // Verify cash is no longer exactly $10,000 — it should show a different value
-    await expect(headerCash.getByText(/\$[0-9,]+\.\d{2}/)).toBeVisible();
+    await expect(headerCash.getByText(/\$[0-9,]+\.\d{2}/).first()).toBeVisible();
 
     // A position for AAPL should appear in the positions table
     // PositionsTable has table headers: Ticker, Qty, Avg Cost, Price
@@ -33,7 +33,7 @@ test.describe('Trading', () => {
 
   test('can sell shares after buying them', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // First buy shares
     await page.getByPlaceholder('Ticker').fill('AAPL');
@@ -51,7 +51,7 @@ test.describe('Trading', () => {
 
   test('portfolio endpoint returns updated data after trade', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // Check initial portfolio (use relative assertions — prior tests may have modified state)
     const initialPortfolio = await page.request.get('/api/portfolio');

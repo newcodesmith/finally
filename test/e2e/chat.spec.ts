@@ -4,7 +4,7 @@ test.describe('AI Chat (Mock Mode)', () => {
   test('can open chat panel and send a message', async ({ page }) => {
     await page.goto('/');
     // Wait for page to load
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // The chat panel is collapsed by default. The toggle button is a floating
     // button with title "Open AI Assistant" (from AppShell.tsx)
@@ -29,7 +29,7 @@ test.describe('AI Chat (Mock Mode)', () => {
 
   test('chat shows user message in conversation', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // Open chat
     await page.getByTitle('Open AI Assistant').click();
@@ -65,7 +65,7 @@ test.describe('AI Chat (Mock Mode)', () => {
 
   test('can close the chat panel', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('AAPL')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="watchlist"]').getByText('AAPL')).toBeVisible({ timeout: 15000 });
 
     // Open chat
     await page.getByTitle('Open AI Assistant').click();

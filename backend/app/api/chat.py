@@ -184,12 +184,12 @@ async def chat(body: ChatRequest, request: Request):
         )
     else:
         try:
-            from litellm import completion
-            response = completion(
+            from litellm import acompletion
+            response = await acompletion(
                 model=MODEL,
                 messages=messages,
                 response_format=LLMResponse,
-                reasoning_effort="low",
+                timeout=30,
                 extra_body=EXTRA_BODY,
             )
             content = response.choices[0].message.content

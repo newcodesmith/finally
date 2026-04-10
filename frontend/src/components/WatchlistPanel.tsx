@@ -1,10 +1,11 @@
 'use client';
 
+import { useShallow } from 'zustand/react/shallow';
 import { usePriceStore } from '@/stores/usePriceStore';
 import WatchlistRow from './WatchlistRow';
 
 export default function WatchlistPanel() {
-  const tickers = usePriceStore((s) => Object.keys(s.prices));
+  const tickers = usePriceStore(useShallow((s) => Object.keys(s.prices)));
   const selectedTicker = usePriceStore((s) => s.selectedTicker);
   const setSelectedTicker = usePriceStore((s) => s.setSelectedTicker);
 

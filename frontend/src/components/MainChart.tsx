@@ -5,6 +5,8 @@ import { usePriceStore } from '@/stores/usePriceStore';
 import { formatPrice } from '@/lib/format';
 import type { IChartApi, ISeriesApi, Time, LineSeriesPartialOptions } from 'lightweight-charts';
 
+const EMPTY_ARRAY: number[] = [];
+
 export default function MainChart() {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
@@ -14,8 +16,8 @@ export default function MainChart() {
   const selectedTicker = usePriceStore((s) => s.selectedTicker);
   const priceData = usePriceStore((s) => s.prices[s.selectedTicker ?? '']);
   const history = usePriceStore(
-    (s) => s.sparklineHistory[s.selectedTicker ?? ''] ?? []
-  );
+    (s) => s.sparklineHistory[s.selectedTicker ?? '']
+  ) ?? EMPTY_ARRAY;
 
   // Initialize chart (once)
   useEffect(() => {
