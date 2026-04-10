@@ -94,13 +94,11 @@ Plans:
   2. The portfolio heatmap (treemap) renders positions sized by weight and colored by P&L, with a placeholder message when no positions exist
   3. The P&L line chart displays portfolio value over time from snapshot data, and the positions table shows all holdings with unrealized P&L
   4. The AI chat panel is docked/collapsible, shows conversation history with a loading indicator during LLM calls, and displays trade executions and watchlist changes inline
-**Plans**: TBD
-**UI hint**: yes
+**Plans:** 2 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+- [ ] 05-01-PLAN.md — Portfolio store, visualizations (heatmap, P&L chart, positions table), trade bar, and layout wiring
+- [ ] 05-02-PLAN.md — AI chat panel with conversation history, loading state, and inline action confirmations
 
 ### Phase 6: Infrastructure & Testing
 **Goal**: The entire application runs from a single Docker container with comprehensive test coverage
@@ -131,5 +129,5 @@ Note: Phase 4 depends on Phase 1 (not Phase 3), so Phases 3 and 4 could theoreti
 | 2. Watchlist & Portfolio APIs | 2/2 | Complete | - |
 | 3. AI Chat Backend | 1/2 | In Progress|  |
 | 4. Frontend Shell & Live Data | 3/3 | Complete   | 2026-04-09 |
-| 5. Frontend Portfolio & Trading | 0/3 | Not started | - |
+| 5. Frontend Portfolio & Trading | 0/2 | Not started | - |
 | 6. Infrastructure & Testing | 0/3 | Not started | - |
