@@ -16,9 +16,9 @@ fi
 docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
 
 # Determine env file flag
-ENV_FLAG=""
+DOCKER_ARGS=()
 if [[ -f .env ]]; then
-    ENV_FLAG="--env-file .env"
+    DOCKER_ARGS+=(--env-file .env)
 fi
 
 # Run container
@@ -26,7 +26,7 @@ docker run -d \
     --name "$CONTAINER_NAME" \
     -v "$VOLUME_NAME:/app/db" \
     -p "$PORT:8000" \
-    $ENV_FLAG \
+    "${DOCKER_ARGS[@]}" \
     "$IMAGE_NAME"
 
 echo ""
