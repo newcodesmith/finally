@@ -1,32 +1,23 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-
-interface PortfolioData {
-  cash_balance: number;
-  total_value: number;
-}
+import { useEffect } from 'react';
+import { usePortfolioStore } from '@/stores/usePortfolioStore';
 
 export function usePortfolio(refreshInterval = 5000) {
-  const [data, setData] = useState<PortfolioData>({ cash_balance: 10000, total_value: 10000 });
-
-  const fetchPortfolio = useCallback(async () => {
-    try {
-      const res = await fetch('/api/portfolio');
-      if (res.ok) {
-        const json = await res.json();
-        setData({ cash_balance: json.cash_balance, total_value: json.total_value });
-      }
-    } catch {
-      // Silently fail — header shows last known values
-    }
-  }, []);
+  const fetchPortfolio = usePortfolioStore((s) => s.fetchPortfolio);
+  const fetchSnapshots = usePortfolioStore((s) => s.fetchSnapshots);
+  const cashBalance = usePortfolioStore((s) => s.cashBalance);
+  const totalValue = usePortfolioStore((s) => s.totalValue);
 
   useEffect(() => {
     fetchPortfolio();
-    const interval = setInterval(fetchPortfolio, refreshInterval);
+    fetchSnapshots();
+    const interval = setInterval(() => {
+      fetchPortfolio();
+      fetchSnapshots();
+    }, refreshInterval);
     return () => clearInterval(interval);
-  }, [fetchPortfolio, refreshInterval]);
+  }, [fetchPortfolio, fetchSnapshots, refreshInterval]);
 
-  return data;
+  return { cash_balance: cashBalance, total_value: totalValue };
 }
