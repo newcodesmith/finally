@@ -63,9 +63,9 @@
 ### Frontend - Trading & Chat
 
 - [x] **UI-TRADE-01**: Trade bar with ticker field, quantity field, buy button, sell button
-- [ ] **UI-CHAT-01**: Docked/collapsible AI chat panel with message history
-- [ ] **UI-CHAT-02**: Loading indicator while waiting for LLM response
-- [ ] **UI-CHAT-03**: Trade executions and watchlist changes shown inline as confirmations
+- [x] **UI-CHAT-01**: Docked/collapsible AI chat panel with message history
+- [x] **UI-CHAT-02**: Loading indicator while waiting for LLM response
+- [x] **UI-CHAT-03**: Trade executions and watchlist changes shown inline as confirmations
 
 ### Frontend - Layout & Design
 
@@ -163,9 +163,9 @@
 | UI-PNL-01 | Phase 5 | Complete |
 | UI-POS-01 | Phase 5 | Complete |
 | UI-TRADE-01 | Phase 5 | Complete |
-| UI-CHAT-01 | Phase 5 | Pending |
-| UI-CHAT-02 | Phase 5 | Pending |
-| UI-CHAT-03 | Phase 5 | Pending |
+| UI-CHAT-01 | Phase 5 | Complete |
+| UI-CHAT-02 | Phase 5 | Complete |
+| UI-CHAT-03 | Phase 5 | Complete |
 | UI-LAYOUT-01 | Phase 4 | Complete |
 | UI-LAYOUT-02 | Phase 4 | Complete |
 | UI-LAYOUT-03 | Phase 4 | Complete |

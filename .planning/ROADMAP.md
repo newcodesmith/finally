@@ -98,7 +98,7 @@ Plans:
 
 Plans:
 - [x] 05-01-PLAN.md — Portfolio store, visualizations (heatmap, P&L chart, positions table), trade bar, and layout wiring
-- [ ] 05-02-PLAN.md — AI chat panel with conversation history, loading state, and inline action confirmations
+- [x] 05-02-PLAN.md — AI chat panel with conversation history, loading state, and inline action confirmations
 
 ### Phase 6: Infrastructure & Testing
 **Goal**: The entire application runs from a single Docker container with comprehensive test coverage
