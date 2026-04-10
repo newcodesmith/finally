@@ -96,7 +96,7 @@
 - [x] **TEST-03**: Backend pytest tests for LLM (structured output parsing, error handling)
 - [x] **TEST-04**: Backend pytest tests for API routes
 - [x] **TEST-05**: Frontend component tests
-- [ ] **TEST-06**: E2E Playwright tests with docker-compose.test.yml and LLM_MOCK=true
+- [x] **TEST-06**: E2E Playwright tests with docker-compose.test.yml and LLM_MOCK=true
 
 ## v2 Requirements
 
@@ -184,7 +184,7 @@
 | TEST-03 | Phase 6 | Complete |
 | TEST-04 | Phase 6 | Complete |
 | TEST-05 | Phase 6 | Complete |
-| TEST-06 | Phase 6 | Pending |
+| TEST-06 | Phase 6 | Complete |
 
 **Coverage:**
 - v1 requirements: 55 total
