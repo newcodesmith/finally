@@ -32,7 +32,23 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'history snapshots: {len\\(d\\)}'\\)\" kill %1 rm -f ../db/finally_test2.db)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Skill(gsd:map-codebase)",
+      "Skill(gsd:autonomous)",
+      "Skill(gsd:plan-phase)",
+      "Skill(gsd:execute-phase)",
+      "WebFetch(domain:files.pythonhosted.org)",
+      "WebFetch(domain:pypi.org)",
+      "Skill(gsd:code-review)",
+      "Bash(git commit -m 'test\\(03-01\\): add chat endpoint integration tests:*)",
+      "Bash(git commit -m 'docs\\(03-01\\): complete chat endpoint tests plan:*)",
+      "Skill(gsd:next)",
+      "Skill(gsd:discuss-phase)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebSearch",
+      "WebFetch(domain:fonts.googleapis.com)",
+      "Skill(gsd:code-review-fix)",
+      "Skill(gsd:audit-milestone)"
     ]
   },
   "sandbox": {
