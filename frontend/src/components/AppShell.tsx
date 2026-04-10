@@ -1,5 +1,6 @@
 'use client';
 
+import { MessageSquare } from 'lucide-react';
 import Header from './Header';
 import WatchlistPanel from './WatchlistPanel';
 import MainChart from './MainChart';
@@ -7,6 +8,8 @@ import PortfolioHeatmap from './PortfolioHeatmap';
 import PnlChart from './PnlChart';
 import PositionsTable from './PositionsTable';
 import TradeBar from './TradeBar';
+import ChatPanel from './ChatPanel';
+import { useChatStore } from '@/stores/useChatStore';
 import type { ConnectionStatus } from '@/types/market';
 
 interface AppShellProps {
@@ -20,6 +23,9 @@ export default function AppShell({
   cashBalance = 10000,
   connectionStatus = 'disconnected',
 }: AppShellProps) {
+  const isOpen = useChatStore((s) => s.isOpen);
+  const toggleOpen = useChatStore((s) => s.toggleOpen);
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-surface">
       {/* Header — 48px fixed */}
@@ -62,7 +68,25 @@ export default function AppShell({
           {/* Trade bar at bottom */}
           <TradeBar />
         </main>
+
+        {/* Chat sidebar — collapsible right panel */}
+        {isOpen && (
+          <aside className="w-[340px] shrink-0 bg-surface-raised border-l border-border flex flex-col">
+            <ChatPanel />
+          </aside>
+        )}
       </div>
+
+      {/* Chat toggle button — floating bottom-right */}
+      {!isOpen && (
+        <button
+          onClick={toggleOpen}
+          className="fixed bottom-4 right-4 z-50 bg-accent-purple text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:opacity-90"
+          title="Open AI Assistant"
+        >
+          <MessageSquare className="w-5 h-5" />
+        </button>
+      )}
     </div>
   );
 }
