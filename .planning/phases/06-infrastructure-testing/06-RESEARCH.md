@@ -361,22 +361,19 @@ This is critical for planning -- these tests already exist and satisfy requireme
 | A4 | `COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv` is the current install pattern | Code Examples | Low -- well documented approach |
 | A5 | Frontend static export at `frontend/out/` is the correct build output path | Architecture Patterns | Low -- verified `output: 'export'` in next.config.ts, `out/` directory exists |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **uv CMD syntax in Docker**
+1. **uv CMD syntax in Docker** (RESOLVED)
    - What we know: uv manages the backend deps and venv
-   - What's unclear: Whether `uv run uvicorn` works without dev deps, or if we should invoke uvicorn directly from the venv
-   - Recommendation: Test both; `uv run --no-dev uvicorn app.main:app` or `/app/backend/.venv/bin/uvicorn app.main:app`
+   - Resolution: Use `uv run uvicorn app.main:app` — uv resolves the venv automatically. The `--no-dev` flag is not needed since uvicorn is a production dep. If this fails in Docker, fallback to direct venv path `/app/backend/.venv/bin/uvicorn app.main:app`.
 
-2. **Frontend test scope for TEST-05**
+2. **Frontend test scope for TEST-05** (RESOLVED)
    - What we know: 15 components exist in `frontend/src/components/`, plus 2 hooks, 3 stores
-   - What's unclear: Which components are most important to test
-   - Recommendation: Focus on components with logic: PriceCell (flash animation), TradeBar (form validation), ChatPanel (message flow), Header (value display). Skip pure layout components.
+   - Resolution: Test 4 logic-heavy components: PriceCell (flash animation), TradeBar (form validation), ChatMessage (rendering), Header (value display). Skip pure layout components.
 
-3. **E2E test scope for TEST-06**
+3. **E2E test scope for TEST-06** (RESOLVED)
    - What we know: Plan specifies core user flows with LLM_MOCK=true
-   - What's unclear: Exact number and scope of E2E scenarios
-   - Recommendation: 5 test files covering the success criteria flows: smoke test, watchlist CRUD, buy/sell trades, AI chat mock, SSE streaming
+   - Resolution: 4 spec files covering success criteria flows: smoke test (app loads, prices stream), watchlist CRUD, buy/sell trades with portfolio update, AI chat with mock responses.
 
 ## Environment Availability
 
