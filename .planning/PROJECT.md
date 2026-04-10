@@ -12,13 +12,14 @@ Users can interact with a real-time simulated trading environment through both m
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Live-updating price watchlist with flash animations and sparklines for 10 default tickers — Validated in Phase 4: Frontend Shell & Live Data
+- [x] Main chart area showing detailed price history for selected ticker — Validated in Phase 4: Frontend Shell & Live Data
+- [x] Dark terminal-inspired UI with accent colors (yellow #ecad0a, blue #209dd7, purple #753991) — Validated in Phase 4: Frontend Shell & Live Data
+- [x] Connection status indicator (green/yellow/red dot) — Validated in Phase 4: Frontend Shell & Live Data
 
 ### Active
 
-- [ ] Live-updating price watchlist with flash animations and sparklines for 10 default tickers
 - [ ] SSE streaming of market data from simulator (or optional Massive API)
-- [ ] Main chart area showing detailed price history for selected ticker
 - [ ] Portfolio heatmap (treemap) sized by weight, colored by P&L
 - [ ] P&L line chart tracking total portfolio value over time
 - [ ] Positions table with ticker, quantity, avg cost, current price, unrealized P&L, % change
@@ -29,8 +30,6 @@ Users can interact with a real-time simulated trading environment through both m
 - [ ] Portfolio starting at $10,000 virtual cash
 - [ ] SQLite database with lazy initialization and seed data
 - [ ] Single Docker container serving frontend static export + FastAPI backend on port 8000
-- [ ] Dark terminal-inspired UI with accent colors (yellow #ecad0a, blue #209dd7, purple #753991)
-- [ ] Connection status indicator (green/yellow/red dot)
 - [ ] Portfolio snapshots recorded every 30 seconds and after each trade (pruned after 24h)
 - [ ] Market simulator using geometric Brownian motion with correlated moves and random events
 - [ ] Backend unit tests (pytest) for market data, portfolio, LLM, API routes
@@ -100,4 +99,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-09 after initialization*
+*Last updated: 2026-04-09 after Phase 4 completion*
