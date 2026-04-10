@@ -82,10 +82,10 @@
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Multi-stage Dockerfile (Node build → Python runtime)
-- [ ] **INFRA-02**: FastAPI serves static frontend + API on port 8000
-- [ ] **INFRA-03**: Docker volume mount for SQLite persistence
-- [ ] **INFRA-04**: Start/stop scripts for macOS/Linux
+- [x] **INFRA-01**: Multi-stage Dockerfile (Node build → Python runtime)
+- [x] **INFRA-02**: FastAPI serves static frontend + API on port 8000
+- [x] **INFRA-03**: Docker volume mount for SQLite persistence
+- [x] **INFRA-04**: Start/stop scripts for macOS/Linux
 - [ ] **INFRA-05**: GET /api/health endpoint
 - [ ] **INFRA-06**: .env.example with all environment variables documented
 
@@ -173,10 +173,10 @@
 | DB-01 | Phase 1 | Pending |
 | DB-02 | Phase 1 | Pending |
 | DB-03 | Phase 1 | Pending |
-| INFRA-01 | Phase 6 | Pending |
-| INFRA-02 | Phase 6 | Pending |
-| INFRA-03 | Phase 6 | Pending |
-| INFRA-04 | Phase 6 | Pending |
+| INFRA-01 | Phase 6 | Complete |
+| INFRA-02 | Phase 6 | Complete |
+| INFRA-03 | Phase 6 | Complete |
+| INFRA-04 | Phase 6 | Complete |
 | INFRA-05 | Phase 1 | Pending |
 | INFRA-06 | Phase 1 | Pending |
 | TEST-01 | Phase 6 | Pending |
