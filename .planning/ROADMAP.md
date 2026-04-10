@@ -114,7 +114,7 @@ Plans:
 
 Plans:
 - [x] 06-01-PLAN.md — Multi-stage Dockerfile and start/stop scripts
-- [ ] 06-02-PLAN.md — Backend test gap (health endpoint) and frontend Vitest component tests
+- [x] 06-02-PLAN.md — Backend test gap (health endpoint) and frontend Vitest component tests
 - [ ] 06-03-PLAN.md — E2E Playwright tests with docker-compose.test.yml
 
 ## Progress

@@ -91,11 +91,11 @@
 
 ### Testing
 
-- [ ] **TEST-01**: Backend pytest tests for market data (simulator, GBM, Massive parsing, interface)
-- [ ] **TEST-02**: Backend pytest tests for portfolio (trade execution, P&L, edge cases)
-- [ ] **TEST-03**: Backend pytest tests for LLM (structured output parsing, error handling)
-- [ ] **TEST-04**: Backend pytest tests for API routes
-- [ ] **TEST-05**: Frontend component tests
+- [x] **TEST-01**: Backend pytest tests for market data (simulator, GBM, Massive parsing, interface)
+- [x] **TEST-02**: Backend pytest tests for portfolio (trade execution, P&L, edge cases)
+- [x] **TEST-03**: Backend pytest tests for LLM (structured output parsing, error handling)
+- [x] **TEST-04**: Backend pytest tests for API routes
+- [x] **TEST-05**: Frontend component tests
 - [ ] **TEST-06**: E2E Playwright tests with docker-compose.test.yml and LLM_MOCK=true
 
 ## v2 Requirements
@@ -179,11 +179,11 @@
 | INFRA-04 | Phase 6 | Complete |
 | INFRA-05 | Phase 1 | Pending |
 | INFRA-06 | Phase 1 | Pending |
-| TEST-01 | Phase 6 | Pending |
-| TEST-02 | Phase 6 | Pending |
-| TEST-03 | Phase 6 | Pending |
-| TEST-04 | Phase 6 | Pending |
-| TEST-05 | Phase 6 | Pending |
+| TEST-01 | Phase 6 | Complete |
+| TEST-02 | Phase 6 | Complete |
+| TEST-03 | Phase 6 | Complete |
+| TEST-04 | Phase 6 | Complete |
+| TEST-05 | Phase 6 | Complete |
 | TEST-06 | Phase 6 | Pending |
 
 **Coverage:**
